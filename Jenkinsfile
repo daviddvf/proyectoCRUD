@@ -17,12 +17,12 @@ pipeline {
     stage('Build & Push') {
       steps {
         script {
-          def imageName = "registry.hub.docker.com/daviddvf/mi_crud_app:latest"
-          // Build
-          docker.build('david/proyectocrud:web')
+          def imageName = "david/proyectocrud:web"
+      // Construimos desde la carpeta "backend"
+        docker.build(imageName, "-f backend/Dockerfile backend")
           // Login + Push
           docker.withRegistry('https://registry.hub.docker.com', 'docker-creds') {
-            docker.image('david/proyectocrud:web').push('latest')
+            docker.image(imageName).push('latest')
           }
         }
       }
