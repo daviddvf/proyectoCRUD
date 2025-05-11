@@ -14,13 +14,15 @@ pipeline {
       }
     }
 
-    stage('Build & Push Images') {
+    stage('Build & Push') {
       steps {
         script {
+          def imageName = "registry.hub.docker.com/daviddvf/mi_crud_app:latest"
+          // Build
+          docker.build('david/proyectocrud:web')
+          // Login + Push
           docker.withRegistry('https://registry.hub.docker.com', 'docker-creds') {
-            def app = docker.build("david/proyectocrud:web", "./backend")
-            app.push("latest")
-            app.push("${env.BUILD_NUMBER}")
+            docker.image('david/proyectocrud:web').push('latest')
           }
         }
       }
