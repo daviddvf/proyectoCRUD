@@ -21,9 +21,11 @@ pipeline {
       // Construimos desde la carpeta "backend"
         docker.build(imageName, "-f backend/Dockerfile backend")
           // Login + Push
-          docker.withRegistry('https://registry.hub.docker.com', 'docker-creds') {
-            docker.image(imageName).push('latest')
-          }
+          docker.withRegistry('', 'docker-creds') {
+  def img = docker.image(imageName)
+  img.push()           // pushea la tag 'web'
+  img.push('latest')   // y también la tag 'latest'
+}
         }
       }
     }
