@@ -17,7 +17,7 @@ pipeline {
     stage('Build & Push') {
       steps {
         script {
-          def imageName = "david/proyectocrud:web"
+          def imageName = "daviddvf/proyectocrud:web"
       // Construimos desde la carpeta "backend"
         docker.build(imageName, "-f backend/Dockerfile backend")
           // Login + Push
