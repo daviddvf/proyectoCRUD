@@ -38,7 +38,7 @@ pipeline {
       )
     ]) {
       // Nos movemos a la carpeta donde está el docker-compose.yml
-      dir('backend') {
+      
         sh '''
           
           docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
@@ -52,7 +52,7 @@ pipeline {
           
           docker compose up -d --build
         '''
-      }
+      
     }
   }
 }
