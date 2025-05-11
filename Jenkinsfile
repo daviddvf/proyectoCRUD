@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/daviddvf/proyectoCRUD.git
+        git url: 'https://github.com/daviddvf/proyectoCRUD.git' ,
             credentialsId: 'git-creds', branch: 'main'
       }
     }
