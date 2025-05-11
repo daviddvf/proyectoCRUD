@@ -1,0 +1,28 @@
+version: "2.4"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: db
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: proyectolempro
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+
+  web:
+    build: ./backend
+    container_name: web
+    image: david/proyectoCRUD:web
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+
+volumes:
+  db_data:
