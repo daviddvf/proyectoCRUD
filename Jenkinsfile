@@ -18,7 +18,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker-creds') {
-            def app = docker.build("david/proyectoCRUD:web", "./backend")
+            def app = docker.build("david/proyectocrud:web", "./backend")
             app.push("latest")
             app.push("${env.BUILD_NUMBER}")
           }
