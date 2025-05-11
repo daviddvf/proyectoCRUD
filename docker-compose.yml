@@ -16,7 +16,7 @@ services:
   web:
     build: ./backend
     container_name: web
-    image: david/proyectoCRUD:web
+    image: david/proyectocrud:web
     ports:
       - "8000:8000"
     env_file:
