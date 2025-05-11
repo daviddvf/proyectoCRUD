@@ -16,7 +16,7 @@ services:
   
   web:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     image: daviddvf/proyectocrud:web
     ports:
