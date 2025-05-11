@@ -29,16 +29,33 @@ pipeline {
     }
 
     stage('Deploy with Compose') {
-      steps {
+  steps {
+    withCredentials([
+      usernamePassword(
+        credentialsId: 'dockerhub-creds',
+        usernameVariable: 'DOCKERHUB_USR',
+        passwordVariable: 'DOCKERHUB_PSW'
+      )
+    ]) {
+      // Nos movemos a la carpeta donde está el docker-compose.yml
+      dir('backend') {
         sh '''
+          
           docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW
-          cd $WORKSPACE
+
+          
           docker compose pull
+
+          
           docker compose down
+
+          
           docker compose up -d --build
         '''
       }
     }
+  }
+}
   }
 
   post {
